@@ -2,6 +2,14 @@ const container = document.querySelector('.container');
 const chooseBtn = document.querySelector('.btn');
 
 
+const getRandomColor = () => {
+  const randomR = Math.floor(Math.random() * 256);
+  const randomG = Math.floor(Math.random() * 256);
+  const randomB = Math.floor(Math.random() * 256);
+
+  return `rgb(${randomR}, ${randomG}, ${randomB})`
+}
+
 const createGrid = (squaresPerSide) => {
   const gridSize = squaresPerSide * squaresPerSide;
   for (let i = 0; i < gridSize; i++) {
@@ -16,7 +24,7 @@ const createGrid = (squaresPerSide) => {
   
   gridDivs.forEach(gridDiv => {
     gridDiv.addEventListener('mouseover', () => {
-      gridDiv.classList.add('hover');
+      gridDiv.style.backgroundColor = getRandomColor();
     })
   });
 }
