@@ -1,4 +1,5 @@
-const container = document.querySelector('.container');
+const CANVAS_SIZE = 640;
+const container = document.querySelector('.grid');
 const chooseBtn = document.querySelector('.btn');
 
 
@@ -11,11 +12,11 @@ const getRandomColor = () => {
 }
 
 const createGrid = (squaresPerSide) => {
-  const gridSize = squaresPerSide * squaresPerSide;
-  for (let i = 0; i < gridSize; i++) {
+  const gridSize = Math.round(CANVAS_SIZE / squaresPerSide);
+  for (let i = 0; i < squaresPerSide * squaresPerSide; i++) {
     const gridDiv = document.createElement('div');
-    gridDiv.style.width = '16px';
-    gridDiv.style.height = '16px';
+    gridDiv.style.width = `${gridSize}px`;
+    gridDiv.style.height = `${gridSize}px`;
     gridDiv.classList.add('gridDiv');
     container.appendChild(gridDiv);
   }
@@ -32,7 +33,7 @@ const createGrid = (squaresPerSide) => {
 
 chooseBtn.addEventListener('click', () => {
   const squaresPerSide = parseInt(window.prompt('Enter amount of squares per side(max 100).'));
-  if (squaresPerSide > 100) {
+  if ((squaresPerSide > 100) || (typeof squaresPerSide !== "number")) {
     window.alert("You've entered over a 100, click button again.")
   } else {
     if (container.childNodes.length !== 0) { // checks if element is empty
